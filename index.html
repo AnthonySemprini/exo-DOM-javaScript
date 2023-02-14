@@ -22,20 +22,57 @@
                 parent.appendChild(temp)
             }
         }
+        function schowReaction(type, clickBox){
+            clickBox.classList.add(type)
+            if(type !=="succes"){
+                setTimeout(function(){
+                    clickBox.classList.remove(type)
+
+                },800)
+            }
+        }
        
        const box = document.createElement("div")
        box.classList.add("box") 
 
        const board = document.querySelector("#board")
+
+       let nb = 1
        
        for(let i = 1; i <=10; i++){
         let  newbox = box.cloneNode()
         newbox.innerText = i
         board.appendChild(newbox)
-       }0
-
-       shuffleChildren(board)
        
+
+       newbox.addEventListener("click",function(){
+        if(i== nb){
+            newbox.classList.add("box-valid")
+            //1
+            if(nb == board.children.length){
+               board.querySelectorAll(".box").forEach(function(box){
+                schowReaction("success", box)
+            })
+        }
+        nb++
+    }
+    //2
+    else if(i >nb ){
+        schowReaction("error", newbox)
+        nb = 1
+        board.querySelectorAll(".box-valid").forEach(function(validBox){
+            validBox.classList.remove("box-valid")
+           
+                })
+            }
+            //3
+            else(
+                schowReaction("notice", newbox)
+            )
+       })
+       }
+       shuffleChildren(board)
+
     //    let i = board.children.length, k , temp
     //    while (--i > 0) { //on boucle tant que 1 oté de i est tj positif
     //     // k stock un nmobre aleatoire base sur i
