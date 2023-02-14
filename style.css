@@ -2,7 +2,13 @@
     display: flex;
     flex-wrap: wrap;
 }
+#timer{
+    font-size: 80px;
+    background-color: red;
+    padding: 10px;
+    border-radius: 10px;
 
+}
 .box{
     width: 75px;
     height: 75px;
