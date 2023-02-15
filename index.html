@@ -14,90 +14,9 @@
 
     <script>
 
-// function shuffleChildren(parent){
-//             let children = parent.children
-//             let i = children.length, k , temp
-//             while(--i > 0 ){
-//                 k = Math.floor(Math.random() * (i+1))
-//                 temp = children[k]
-//                 children[k] = children[i]
-//                 parent.appendChild(temp)
-//             }
-//         }
+        //fonction melange
 
-//         function schowReaction(type, clickBox){
-//             clickBox.classList.add(type)
-//             if(type !=="succes"){
-//                 setTimeout(function(){
-//                     clickBox.classList.remove(type)
-
-//                 },800)
-//             }
-//         }
-
-// const box = document.createElement("div");
-// box.classList.add("box");
-
-// const board = document.querySelector("#board");
-
-// let nb = 1;
-
-// for (let i = 1; i <= 10; i++) {
-//     const newbox = box.cloneNode();
-//     newbox.innerText = i;
-//     board.appendChild(newbox);
-
-//     newbox.addEventListener("click", function () {
-//         if (i === nb) {
-//             newbox.classList.add("box-valid");
-
-//             if (nb === board.children.length) {
-//                 board.querySelectorAll(".box").forEach(function (box) {
-//                     showReaction("success", box)
-//                     clearInterval(timerInterval);
-//                 });
-
-//             }
-
-//             nb++;
-//         } else if (i > nb) {
-//             showReaction("error", newbox);
-//             nb = 1;
-//             board.querySelectorAll(".box-valid").forEach(function (validBox) {
-//                 validBox.classList.remove("box-valid")
-//             });
-//         } else {
-//             showReaction("notice", newbox)
-//         }
-//     });
-// }
-
-// shuffleChildren(board);
-
-// const timerEl = document.querySelector("#timer");
-// const timeLimit = 20;
-// let remainingTime = timeLimit;
-// let endTime = null;
-
-// const timerInterval = setInterval(function () {
-//     const now = new Date().getTime();
-
-//     if (endTime === null) {
-//         // start timer on first click
-//         if (nb > 1) {
-//             endTime = now + remainingTime * 1000;
-//         }
-//     } else if (now >= endTime) {
-//         clearInterval(timerInterval);
-//         remainingTime = 0;
-//     } else {
-//         remainingTime = Math.ceil((endTime - now) / 1000);
-//     }
-
-//     timerEl.innerText = `Temps restant : ${remainingTime}`;
-// }, 1000);
-
-        function shuffleChildren(parent){
+      function shuffleChildren(parent){
             let children = parent.children
             let i = children.length, k , temp
             while(--i > 0 ){
@@ -107,6 +26,8 @@
                 parent.appendChild(temp)
             }
         }
+        //function color les box en fonction de success error ou notice
+
         function schowReaction(type, clickBox){
             clickBox.classList.add(type)
             if(type !=="succes"){
@@ -116,7 +37,8 @@
                 },800)
             }
         }
-       
+       // creation des 10 box
+
        const box = document.createElement("div")
        box.classList.add("box") 
 
@@ -129,6 +51,7 @@
         newbox.innerText = i
         board.appendChild(newbox)
        
+        // boucle pour changer les couleur en fonction de success error et notice
 
        newbox.addEventListener("click",function(){
         if(i== nb){
@@ -147,7 +70,7 @@
         nb = 1
         board.querySelectorAll(".box-valid").forEach(function(validBox){
             validBox.classList.remove("box-valid")
-           
+                shuffleChildren(board)
                 })
             }
             //3
@@ -157,6 +80,8 @@
        })
        }
        shuffleChildren(board)
+
+       // melange aleatoire des box
 
        let i = board.children.length, k , temp
        while (--i > 0) { //on boucle tant que 1 oté de i est tj positif
