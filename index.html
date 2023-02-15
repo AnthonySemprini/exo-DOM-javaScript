@@ -8,12 +8,31 @@
     <title>Document</title>
 </head>
 <body>
-
-    <div onclick="shuffleChildren(board)"  id="board"></div>
     
-    <span id="timer"></span>
-
+    <div id="board"></div>
+    <!-- <div id="timer"></div> -->
+    
+    
     <script>
+//          timer
+//          const departMinutes = 5
+// let temps = departMinutes * 60
+
+// const timerElement = document.getElementById("timer")
+
+// setInterval(() => {
+//   let minutes = parseInt(temps / 60, 10)
+//   let secondes = parseInt(temps % 60, 10)
+
+//   minutes = minutes < 10 ? "0" + minutes : minutes
+//   secondes = secondes < 10 ? "0" + secondes : secondes
+
+//   timerElement.innerText = `${minutes}:${secondes}`
+//   temps = temps <= 0 ? 0 : temps - 1
+// }, 1000)
+        
+
+
 
         //fonction melange
 
@@ -28,7 +47,7 @@
             }
         }
         //function color les box en fonction de success error ou notice
-
+        
         function schowReaction(type, clickBox){
             clickBox.classList.add(type)
             if(type !=="succes"){
@@ -51,12 +70,13 @@
         let  newbox = box.cloneNode()
         newbox.innerText = i
         board.appendChild(newbox)
-       
+        
         // boucle pour changer les couleur en fonction de success error et notice
-
-       newbox.addEventListener("click",function(){
-        if(i== nb){
-            newbox.classList.add("box-valid")
+        
+        newbox.addEventListener("click",function(){
+            if(i== nb){
+                newbox.classList.add("box-valid")
+                shuffleChildren(board)//ajout de shuffle a chaque click sur box
             //1
             if(nb == board.children.length){
                board.querySelectorAll(".box").forEach(function(box){
@@ -97,9 +117,9 @@
        }
        //afficher boite question 
        prompt("Saisissez le chiffre de départ")
-       //active shufflechildren a chaque click
-        div.onclick=shuffleChildren(board)
-    </script>
+      
+       
+        </script>
     
 </body>
 </html>
