@@ -9,7 +9,8 @@
 </head>
 <body>
 
-    <div id="board"></div>
+    <div onclick="shuffleChildren(board)"  id="board"></div>
+    
     <span id="timer"></span>
 
     <script>
@@ -94,7 +95,10 @@
         //place l'element k pointé temporairement a la fin du contenue de board
         board.appendChild(temp)
        }
+       //afficher boite question 
        prompt("Saisissez le chiffre de départ")
+       //active shufflechildren a chaque click
+        div.onclick=shuffleChildren(board)
     </script>
     
 </body>
