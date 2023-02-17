@@ -10,12 +10,18 @@
 </head>
 
 <body>
-
+    
     <div id="board"></div>
     <div id="timer"></div>
-
-
+    
+    
     <script>
+        
+        var nbBox=prompt("Saisissez le chiffre de départ")
+
+        var scores = new Array();
+
+        console.log(scores);
         timer
         const departMinutes = 0
         let temps = departMinutes * 60
@@ -37,7 +43,7 @@
         function stopTimer() {
             clearInterval(timer);
             var score = timerElement.innerText
-           
+           console.log(score)
            }
         
 
@@ -73,7 +79,7 @@
 
         let nb = 1
 
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= nbBox; i++) {
             let newbox = box.cloneNode()
             newbox.innerText = i
             board.appendChild(newbox)
@@ -89,6 +95,7 @@
                         board.querySelectorAll(".box").forEach(function (box) {
                             schowReaction("success", box)
                             stopTimer()//stop timer
+                            
                         })
                     }
                     nb++
@@ -124,7 +131,6 @@
             board.appendChild(temp)
         }
         //afficher boite question 
-        prompt("Saisissez le chiffre de départ")
 
 
     </script>
