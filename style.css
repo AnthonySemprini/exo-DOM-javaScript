@@ -3,7 +3,11 @@
     flex-wrap: wrap;
 }
 #timer{
-    font-weight: bold;
+    font-size: 80px;
+    background-color: red;
+    border-radius: 10px;
+    height: 100px;
+    width: 200px;
 }
 .box{
     width: 75px;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,119 +8,127 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <div id="board"></div>
-    <!-- <div id="timer"></div> -->
-    
-    
+    <div id="timer"></div>
+
+
     <script>
-//          timer
-//          const departMinutes = 5
-// let temps = departMinutes * 60
+        timer
+        const departMinutes = 0
+        let temps = departMinutes * 60
 
-// const timerElement = document.getElementById("timer")
+        const timerElement = document.getElementById("timer")
 
-// setInterval(() => {
-//   let minutes = parseInt(temps / 60, 10)
-//   let secondes = parseInt(temps % 60, 10)
+        timer =
+            setInterval(() => {
+                let minutes = parseInt(temps / 60, 10)
+                let secondes = parseInt(temps % 60, 10)
 
-//   minutes = minutes < 10 ? "0" + minutes : minutes
-//   secondes = secondes < 10 ? "0" + secondes : secondes
+                minutes = minutes < 10 ? "0" + minutes : minutes
+                secondes = secondes < 10 ? "0" + secondes : secondes
 
-//   timerElement.innerText = `${minutes}:${secondes}`
-//   temps = temps <= 0 ? 0 : temps - 1
-// }, 1000)
+                timerElement.innerText = `${minutes}:${secondes}`
+                temps = temps + 1
+            }, 1000)
+
+        function stopTimer() {
+            clearInterval(timer);
+            var score = timerElement.innerText
+           
+           }
         
-
-
 
         //fonction melange
 
-      function shuffleChildren(parent){
+        function shuffleChildren(parent) {
             let children = parent.children
-            let i = children.length, k , temp
-            while(--i > 0 ){
-                k = Math.floor(Math.random() * (i+1))
+            let i = children.length, k, temp
+            while (--i > 0) {
+                k = Math.floor(Math.random() * (i + 1))
                 temp = children[k]
                 children[k] = children[i]
                 parent.appendChild(temp)
             }
         }
         //function color les box en fonction de success error ou notice
-        
-        function schowReaction(type, clickBox){
+
+        function schowReaction(type, clickBox) {
             clickBox.classList.add(type)
-            if(type !=="succes"){
-                setTimeout(function(){
+            if (type !== "succes") {
+                setTimeout(function () {
                     clickBox.classList.remove(type)
 
-                },800)
+                }, 800)
             }
         }
-       // creation des 10 box
+        // creation des 10 box
 
-       const box = document.createElement("div")
-       box.classList.add("box") 
+        const box = document.createElement("div")
+        box.classList.add("box")
 
-       const board = document.querySelector("#board")
+        const board = document.querySelector("#board")
 
-       let nb = 1
-       
-       for(let i = 1; i <=10; i++){
-        let  newbox = box.cloneNode()
-        newbox.innerText = i
-        board.appendChild(newbox)
-        
-        // boucle pour changer les couleur en fonction de success error et notice
-        
-        newbox.addEventListener("click",function(){
-            if(i== nb){
-                newbox.classList.add("box-valid")
-                shuffleChildren(board)//ajout de shuffle a chaque click sur box
-            //1
-            if(nb == board.children.length){
-               board.querySelectorAll(".box").forEach(function(box){
-                schowReaction("success", box)
+        let nb = 1
+
+        for (let i = 1; i <= 5; i++) {
+            let newbox = box.cloneNode()
+            newbox.innerText = i
+            board.appendChild(newbox)
+
+            // boucle pour changer les couleur en fonction de success error et notice
+
+            newbox.addEventListener("click", function () {
+                if (i == nb) {
+                    newbox.classList.add("box-valid")
+                    shuffleChildren(board)//ajout de shuffle a chaque click sur box
+                    //1
+                    if (nb == board.children.length) {
+                        board.querySelectorAll(".box").forEach(function (box) {
+                            schowReaction("success", box)
+                            stopTimer()//stop timer
+                        })
+                    }
+                    nb++
+                }
+                //2
+                else if (i > nb) {
+                    schowReaction("error", newbox)
+                    nb = 1
+                    board.querySelectorAll(".box-valid").forEach(function (validBox) {
+                        validBox.classList.remove("box-valid")
+                        shuffleChildren(board)
+                    })
+                }
+                //3
+                else (
+                    schowReaction("notice", newbox)
+                )
             })
         }
-        nb++
-    }
-    //2
-    else if(i >nb ){
-        schowReaction("error", newbox)
-        nb = 1
-        board.querySelectorAll(".box-valid").forEach(function(validBox){
-            validBox.classList.remove("box-valid")
-                shuffleChildren(board)
-                })
-            }
-            //3
-            else(
-                schowReaction("notice", newbox)
-            )
-       })
-       }
-       shuffleChildren(board)
+        shuffleChildren(board)
 
-       // melange aleatoire des box
+        // melange aleatoire des box
 
-       let i = board.children.length, k , temp
-       while (--i > 0) { //on boucle tant que 1 oté de i est tj positif
-        // k stock un nmobre aleatoire base sur i
-        k = Math.floor(Math.random()*(i+1))
-        //temp pointe temporairement l'relement a la position k dans la board
-        temp = board.children[k]
-        //remplace l'element a lma position k par l'element a la position i
-        board.children[k] = board.children[i]
-        //place l'element k pointé temporairement a la fin du contenue de board
-        board.appendChild(temp)
-       }
-       //afficher boite question 
-       prompt("Saisissez le chiffre de départ")
-      
-       
-        </script>
-    
+        let i = board.children.length, k, temp
+        while (--i > 0) { //on boucle tant que 1 oté de i est tj positif
+            // k stock un nmobre aleatoire base sur i
+            k = Math.floor(Math.random() * (i + 1))
+            //temp pointe temporairement l'relement a la position k dans la board
+            temp = board.children[k]
+            //remplace l'element a lma position k par l'element a la position i
+            board.children[k] = board.children[i]
+            //place l'element k pointé temporairement a la fin du contenue de board
+            board.appendChild(temp)
+        }
+        //afficher boite question 
+        prompt("Saisissez le chiffre de départ")
+
+
+    </script>
+
 </body>
+
 </html>
